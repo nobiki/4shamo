@@ -1,0 +1,4 @@
+tests/results/output.xml
+tests/results/log.html
+tests/results/report.html
+*.png

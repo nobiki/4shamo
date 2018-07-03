@@ -1,0 +1,73 @@
+version: "3"
+
+services:
+  sele-hub:
+    container_name: sele-hub
+    hostname: sele-hub
+    image: selenium/hub:3.12.0-cobalt
+    networks:
+      sele-net:
+        ipv4_address: 172.19.0.2
+    ports:
+      - 4444:4444
+
+  sele-chrome:
+    container_name: sele-chrome
+    hostname: sele-chrome
+    image: selenium/node-chrome-debug:3.12.0-cobalt
+    networks:
+      sele-net:
+        ipv4_address: 172.19.0.3
+    ports:
+      - 15900:5900
+    depends_on:
+      - sele-hub
+    environment:
+      - no_proxy=localhost
+      - HUB_PORT_4444_TCP_ADDR=sele-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+      - HUB_ENV_no_proxy=localhost
+
+  sele-firefox:
+    container_name: sele-firefox
+    hostname: sele-firefox
+    image: selenium/node-firefox-debug:3.12.0-cobalt
+    networks:
+      sele-net:
+        ipv4_address: 172.19.0.4
+    ports:
+      - 15901:5900
+    depends_on:
+      - sele-hub
+    environment:
+      - no_proxy=localhost
+      - HUB_PORT_4444_TCP_ADDR=sele-hub
+      - HUB_PORT_4444_TCP_PORT=4444
+      - HUB_ENV_no_proxy=localhost
+
+  gandamu:
+    container_name: gandamu
+    hostname: gandamu
+    image: nobiki/gandamu:latest
+    # build: .
+    networks:
+      sele-net:
+        ipv4_address: 172.19.0.10
+    command: "/bootstrap.sh"
+    # command: "robot -A robot.args entry.robot"
+    # command: /bin/bash
+    volumes:
+      - ${PWD}/tests/:/tests
+      - ${PWD}/bootstrap.sh:/bootstrap.sh
+    depends_on:
+      - sele-hub
+    tty: true
+
+
+networks:
+  sele-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.19.0.0/16

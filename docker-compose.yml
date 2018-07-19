@@ -45,10 +45,10 @@ services:
       - HUB_PORT_4444_TCP_PORT=4444
       - HUB_ENV_no_proxy=localhost
 
-  gandamu:
-    container_name: gandamu
-    hostname: gandamu
-    image: nobiki/gandamu:latest
+  8kiniku:
+    container_name: 8kiniku
+    hostname: 8kiniku
+    image: nobiki/8kiniku:latest
     # build: .
     networks:
       sele-net:

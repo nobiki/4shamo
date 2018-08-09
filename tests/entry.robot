@@ -1,7 +1,9 @@
 *** Settings ***
 Documentation               This is just a tutorial
 Metadata                    VERSION     0.1
+Library                     String
 Library                     SeleniumLibrary
+Library                     OperatingSystem
 Suite Setup                 ブラウザを開く
 Suite Teardown              ブラウザを終了
 Resource                    ./resources/common.robot

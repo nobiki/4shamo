@@ -9,9 +9,9 @@ Suite Teardown              ブラウザを終了
 Resource                    ./resources/common.robot
 
 *** Variables ***
-${SERVER}                   http://google.com/
+${SERVER}                   https://7me.oji.0j0.jp/archives/
 
 *** Test Cases ***
-Googleにアクセスする
-    [Documentation]         検索ページのスクリーンショットを保存
-    スクリーンショットを保存  google-search.png
+Memoでキーワード検索
+    [Documentation]  vimとdockerを検索
+    スクリーンショットを保存  7me-memo-search.png

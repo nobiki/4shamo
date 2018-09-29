@@ -48,8 +48,8 @@ services:
   4shamo:
     container_name: 4shamo
     hostname: 4shamo
-    image: nobiki/4shamo:latest
-    # build: .
+    # image: nobiki/4shamo:latest
+    build: .
     networks:
       sele-net:
         ipv4_address: 172.19.0.10

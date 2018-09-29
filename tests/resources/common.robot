@@ -14,7 +14,7 @@ Documentation  共通定義
 
 スクリーンショットを保存
     [Arguments]  ${fn}
-    Capture Page Screenshot  filename=${fn}
+    Capture Page Screenshot  filename=capture/${fn}
 
 ブラウザを終了
     Close Browser

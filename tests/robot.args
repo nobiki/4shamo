@@ -1,3 +1,4 @@
 --variable GRID_URL: http://sele-hub:4444/wd/hub
---variable BROWSER: firefox
+--variable BROWSER: chrome
+# --variable BROWSER: firefox
 --outputdir results

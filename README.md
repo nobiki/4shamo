@@ -5,7 +5,11 @@ Selenium Grid + Robotframework on Docker
 #### Get stated
 
 ```
-$ docker-compose up -d
+// Start Selenium Hub
+$ docker-compose up -d sele-hub sele-chrome sele-firefox
+
+// Start Robotframework
+$ docker-compose up -d 4shamo
 ```
 
 #### How to access

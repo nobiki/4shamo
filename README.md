@@ -25,3 +25,9 @@ $ docker-compose up -d 4shamo
 #### Testing `bootstrap.sh`
 
 Write the test case in `bootstrap.sh`
+
+#### What is robot.local.conf?
+
+This is the nginx configuration file for viewing the Robotframework test report.  
+If you have Nginx installed on systemd based Linux, you can set it by running `robot.local.sh`  
+Since `robot.local.sh` updates the hosts file, please use it at your own risk

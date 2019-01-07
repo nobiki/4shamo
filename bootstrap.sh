@@ -3,7 +3,7 @@
 if [ ! -e /bootstrap.lock ]; then
 
     pip install selenium==3.13.0 robotframework==3.0.4 \
-        robotframework-seleniumlibrary==3.1.1 \
+        robotframework-seleniumlibrary==3.3.1 \
         robotframework-httplibrary
 
     touch /bootstrap.lock

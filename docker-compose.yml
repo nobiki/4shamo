@@ -5,9 +5,9 @@ services:
     container_name: sele-hub
     hostname: sele-hub
     image: selenium/hub:3.12.0-cobalt
-    networks:
-      sele-net:
-        ipv4_address: 172.100.0.2
+    # networks:
+    #   sele-net:
+    #     ipv4_address: 172.100.0.2
     ports:
       - 4444:4444
 
@@ -15,9 +15,9 @@ services:
     container_name: sele-chrome
     hostname: sele-chrome
     image: selenium/node-chrome-debug:3.12.0-cobalt
-    networks:
-      sele-net:
-        ipv4_address: 172.100.0.3
+    # networks:
+    #   sele-net:
+    #     ipv4_address: 172.100.0.3
     ports:
       - 15900:5900
     depends_on:
@@ -32,9 +32,9 @@ services:
     container_name: sele-firefox
     hostname: sele-firefox
     image: selenium/node-firefox-debug:3.12.0-cobalt
-    networks:
-      sele-net:
-        ipv4_address: 172.100.0.4
+    # networks:
+    #   sele-net:
+    #     ipv4_address: 172.100.0.4
     ports:
       - 15901:5900
     depends_on:
@@ -50,9 +50,9 @@ services:
     hostname: 4shamo
     image: nobiki/4shamo:latest
     # build: .
-    networks:
-      sele-net:
-        ipv4_address: 172.100.0.10
+    # networks:
+    #   sele-net:
+    #     ipv4_address: 172.100.0.10
     command: "/bootstrap.sh"
     # command: "robot -A robot.args entry.robot"
     # command: /bin/bash
@@ -64,10 +64,10 @@ services:
     tty: true
 
 
-networks:
-  sele-net:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.100.0.0/16
+# networks:
+#   sele-net:
+#     driver: bridge
+#     ipam:
+#       driver: default
+#       config:
+#         - subnet: 172.100.0.0/16

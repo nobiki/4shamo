@@ -3,25 +3,25 @@
 
 PROJECT_NAME=4shamo
 
-selenium: ## docker-compose up [Grid]
+selenium: ## [Grid] Hub/Node up
 	docker-compose -p ${PROJECT_NAME} up -d sele-hub sele-chrome sele-firefox
 
-selenium-destroy: ## docker-compose (stop -> rm) [Grid]
+selenium-destroy: ## [Grid] Hub/Node stop -> rm
 	docker-compose -p ${PROJECT_NAME} stop sele-hub sele-chrome sele-firefox
 	docker-compose -p ${PROJECT_NAME} rm -f sele-hub sele-chrome sele-firefox
 
-selenium-rerun: ## selenium-destroy -> selenium [Grid]
+selenium-rerun: ## [Grid] make selenium-destroy -> make selenium
 	make selenium-destroy
 	make selenium
 
-test: ## docker-compose up [Robotframework]
+test: ## [Robotframework] test up
 	docker-compose -p ${PROJECT_NAME} up -d 4shamo
 
-test-destroy: ## docker-compose (stop -> rm) [Robotframework]
+test-destroy: ## [Robotframework] test stop -> rm
 	docker-compose -p ${PROJECT_NAME} stop 4shamo
 	docker-compose -p ${PROJECT_NAME} rm -f 4shamo
 
-test-rerun: ## test-destroy -> test [Robotframework]
+test-rerun: ## [Robotframework] make test-destroy -> make test
 	make test-destroy
 	make test
 

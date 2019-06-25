@@ -33,7 +33,7 @@ services:
   sele-firefox:
     container_name: sele-firefox
     hostname: sele-firefox
-    image: selenium/node-firefox-debug:3.12.0-cobalt
+    image: selenium/node-firefox-debug:3.141.59-radium
     # network_mode: "host"
     # networks:
     #   sele-net:

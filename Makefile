@@ -2,17 +2,40 @@
 .PHONY: help
 
 PROJECT_NAME=4shamo
+SCALE=1
 
-selenium: ## [Grid] Hub/Node up
-	docker-compose -p ${PROJECT_NAME} up -d sele-hub sele-chrome sele-firefox
+hub: ## [Grid] Hub/Node up
+	docker-compose -p ${PROJECT_NAME} up -d sele-hub
 
-selenium-destroy: ## [Grid] Hub/Node stop -> rm
-	docker-compose -p ${PROJECT_NAME} stop sele-hub sele-chrome sele-firefox
-	docker-compose -p ${PROJECT_NAME} rm -f sele-hub sele-chrome sele-firefox
+hub-destroy: ## [Grid] Hub/Node stop -> rm
+	docker-compose -p ${PROJECT_NAME} stop sele-hub
+	docker-compose -p ${PROJECT_NAME} rm -f sele-hub
 
-selenium-rerun: ## [Grid] make selenium-destroy -> make selenium
-	make selenium-destroy
-	make selenium
+hub-rerun: ## [Grid] make hub-destroy -> make hub
+	make hub-destroy
+	make hub
+
+chrome: ## [Grid] Node(Chrome) up
+	docker-compose -p ${PROJECT_NAME} up -d --scale sele-chrome=${SCALE} sele-chrome
+
+chrome-destroy: ## [Grid] Node(Chrome) stop -> rm
+	docker-compose -p ${PROJECT_NAME} stop sele-chrome
+	docker-compose -p ${PROJECT_NAME} rm -f sele-chrome
+
+chrome-rerun: ## [Grid] make chrome-destroy -> make chrome
+	make chrome-destroy
+	make chrome
+
+firefox: ## [Grid] Node(Firefox) up
+	docker-compose -p ${PROJECT_NAME} up -d --scale sele-firefox=${SCALE} sele-firefox
+
+firefox-destroy: ## [Grid] Node(Firefox) stop -> rm
+	docker-compose -p ${PROJECT_NAME} stop sele-firefox
+	docker-compose -p ${PROJECT_NAME} rm -f sele-firefox
+
+firefox-rerun: ## [Grid] make firefox-destroy -> make firefox
+	make firefox-destroy
+	make firefox
 
 test: ## [Robotframework] test up
 	docker-compose -p ${PROJECT_NAME} up -d 4shamo

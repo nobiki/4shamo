@@ -1,4 +1,4 @@
-version: "2.3"
+version: "3.7"
 
 services:
   sele-hub:
@@ -13,15 +13,12 @@ services:
       - 4444:4444
 
   sele-chrome:
-    container_name: sele-chrome
-    hostname: sele-chrome
     image: selenium/node-chrome-debug:3.12.0-cobalt
-    # network_mode: "host"
     # networks:
     #   sele-net:
     #     ipv4_address: 172.100.0.3
     ports:
-      - 15900:5900
+      - 15900-15949:5900
     depends_on:
       - sele-hub
     environment:
@@ -31,15 +28,12 @@ services:
       - HUB_ENV_no_proxy=localhost
 
   sele-firefox:
-    container_name: sele-firefox
-    hostname: sele-firefox
     image: selenium/node-firefox-debug:3.141.59-radium
-    # network_mode: "host"
     # networks:
     #   sele-net:
     #     ipv4_address: 172.100.0.4
     ports:
-      - 15901:5900
+      - 15950-15999:5900
     depends_on:
       - sele-hub
     environment:
@@ -49,17 +43,9 @@ services:
       - HUB_ENV_no_proxy=localhost
 
   4shamo:
-    container_name: 4shamo
-    hostname: 4shamo
     image: nobiki/4shamo:latest
     # build: .
-    # network_mode: "host"
-    # networks:
-    #   sele-net:
-    #     ipv4_address: 172.100.0.10
     command: "/bootstrap.sh"
-    # command: "robot -A robot.args entry.robot"
-    # command: /bin/bash
     volumes:
       - ${PWD}/tests/:/tests
       - ${PWD}/bootstrap.sh:/bootstrap.sh

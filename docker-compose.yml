@@ -4,47 +4,41 @@ services:
   sele-hub:
     container_name: sele-hub
     hostname: sele-hub
-    image: selenium/hub:3.12.0-cobalt
-    # network_mode: "host"
-    # networks:
-    #   sele-net:
-    #     ipv4_address: 172.100.0.2
+    image: selenium/hub:3.141.59
     ports:
       - 4444:4444
+    environment:
+      - TZ=Asia/Tokyo
+    init: true
 
   sele-chrome:
-    image: selenium/node-chrome-debug:3.12.0-cobalt
-    # networks:
-    #   sele-net:
-    #     ipv4_address: 172.100.0.3
+    image: sele-chrome
+    build:
+      context: .
+      dockerfile: docker/chrome.Dockerfile
     ports:
-      - 15900-15949:5900
+      - 15901-1590${SCALE}:5900
     depends_on:
       - sele-hub
-    environment:
-      - no_proxy=localhost
-      - HUB_PORT_4444_TCP_ADDR=sele-hub
-      - HUB_PORT_4444_TCP_PORT=4444
-      - HUB_ENV_no_proxy=localhost
+    env_file: docker/node.env
+    init: true
 
   sele-firefox:
-    image: selenium/node-firefox-debug:3.141.59-radium
-    # networks:
-    #   sele-net:
-    #     ipv4_address: 172.100.0.4
+    image: sele-firefox
+    build:
+      context: .
+      dockerfile: docker/firefox.Dockerfile
     ports:
-      - 15950-15999:5900
+      - 15801-1580${SCALE}:5900
     depends_on:
       - sele-hub
-    environment:
-      - no_proxy=localhost
-      - HUB_PORT_4444_TCP_ADDR=sele-hub
-      - HUB_PORT_4444_TCP_PORT=4444
-      - HUB_ENV_no_proxy=localhost
+    env_file: docker/node.env
+    init: true
 
   4shamo:
-    image: nobiki/4shamo:latest
-    # build: .
+    build:
+      context: .
+      dockerfile: docker/4shamo.Dockerfile
     command: "/bootstrap.sh"
     volumes:
       - ${PWD}/tests/:/tests
@@ -52,12 +46,5 @@ services:
     depends_on:
       - sele-hub
     tty: true
+    init: true
 
-
-# networks:
-#   sele-net:
-#     driver: bridge
-#     ipam:
-#       driver: default
-#       config:
-#         - subnet: 172.100.0.0/16

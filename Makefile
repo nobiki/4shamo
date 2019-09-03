@@ -1,47 +1,30 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
-PROJECT_NAME=4shamo
-SCALE=1
+export PROJECT_NAME=4shamo
+export SCALE=3
 
-hub: ## [Grid] Hub/Node up
+hub: ## [Grid] Hub up
 	docker-compose -p ${PROJECT_NAME} up -d sele-hub
 
-hub-destroy: ## [Grid] Hub/Node stop -> rm
+hub-destroy: ## [Grid] Hub stop -> rm
 	docker-compose -p ${PROJECT_NAME} stop sele-hub
 	docker-compose -p ${PROJECT_NAME} rm -f sele-hub
 
-hub-rerun: ## [Grid] make hub-destroy -> make hub
-	make hub-destroy
-	make hub
+node: ## [Grid] Node up
+	docker-compose -p ${PROJECT_NAME} up -d --scale sele-chrome=${SCALE} --scale sele-firefox=${SCALE} sele-chrome sele-firefox
 
-chrome: ## [Grid] Node(Chrome) up
-	docker-compose -p ${PROJECT_NAME} up -d --scale sele-chrome=${SCALE} sele-chrome
-
-chrome-destroy: ## [Grid] Node(Chrome) stop -> rm
+node-destroy: ## [Grid] Node down
 	docker-compose -p ${PROJECT_NAME} stop sele-chrome
 	docker-compose -p ${PROJECT_NAME} rm -f sele-chrome
-
-chrome-rerun: ## [Grid] make chrome-destroy -> make chrome
-	make chrome-destroy
-	make chrome
-
-firefox: ## [Grid] Node(Firefox) up
-	docker-compose -p ${PROJECT_NAME} up -d --scale sele-firefox=${SCALE} sele-firefox
-
-firefox-destroy: ## [Grid] Node(Firefox) stop -> rm
-	docker-compose -p ${PROJECT_NAME} stop sele-firefox
-	docker-compose -p ${PROJECT_NAME} rm -f sele-firefox
-
-firefox-rerun: ## [Grid] make firefox-destroy -> make firefox
-	make firefox-destroy
-	make firefox
+	docker-compose -p ${PROJECT_NAME} stop  sele-firefox
+	docker-compose -p ${PROJECT_NAME} rm -f  sele-firefox
 
 test: ## [Robotframework] test up
-	docker-compose -p ${PROJECT_NAME} up -d 4shamo
+	docker-compose -p ${PROJECT_NAME} run --rm 4shamo 1>/dev/null &
 
 test-stdout: ## [Robotframework] test up
-	docker-compose -p ${PROJECT_NAME} up 4shamo
+	docker-compose -p ${PROJECT_NAME} run --rm 4shamo
 
 test-destroy: ## [Robotframework] test stop -> rm
 	docker-compose -p ${PROJECT_NAME} stop 4shamo

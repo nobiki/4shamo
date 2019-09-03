@@ -5,17 +5,19 @@ Selenium Grid + Robotframework on Docker
 #### Get stated
 
 ```
-// Start Selenium Hub
-$ docker-compose up -d sele-hub sele-chrome sele-firefox
+// Start Hub
+$ make hub
 
-// Start Robotframework
-$ docker-compose up -d 4shamo
+// Start Node
+$ make node
 ```
 
-#### How to access
+#### Access a node with VNC
 
-* VNC -> 15900 -> chrome-node
-* VNC -> 15901 -> firefox-node
+* chrome-node: 15901-1590x
+* firefox-node: 15801-1580x
+
+If you want to scale Node, please set `SCALE` in [Makefile]()
 
 #### Configuration `robot.args`
 

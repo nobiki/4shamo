@@ -17,7 +17,7 @@ $ make node
 * chrome-node: 15901-1590x
 * firefox-node: 15801-1580x
 
-If you want to scale Node, please set `SCALE` in [Makefile]()
+If you want to scale Node, please set `SCALE` in [Makefile](https://github.com/nobiki/4shamo/blob/0345523ca5b1f89a6bb7976ad56063b8fc55e58e/Makefile#L5)
 
 #### Configuration `robot.args`
 

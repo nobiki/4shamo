@@ -40,6 +40,9 @@ firefox-rerun: ## [Grid] make firefox-destroy -> make firefox
 test: ## [Robotframework] test up
 	docker-compose -p ${PROJECT_NAME} up -d 4shamo
 
+test-stdout: ## [Robotframework] test up
+	docker-compose -p ${PROJECT_NAME} up 4shamo
+
 test-destroy: ## [Robotframework] test stop -> rm
 	docker-compose -p ${PROJECT_NAME} stop 4shamo
 	docker-compose -p ${PROJECT_NAME} rm -f 4shamo

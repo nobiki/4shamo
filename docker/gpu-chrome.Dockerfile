@@ -39,11 +39,16 @@ RUN apt-get update && apt-get install -y \
     rm virtualgl*_amd64.deb && \
     rm -rf /var/lib/apt/lists/*
 
+# Xvfb Script Modication
 COPY docker/entry_point.sh /opt/bin/entry_point.sh
 COPY docker/start-xvfb.sh /opt/bin/start-xvfb.sh
 # COPY docker/start-fluxbox.sh /opt/bin/start-fluxbox.sh
 COPY docker/start-selenium-node.sh /opt/bin/start-selenium-node.sh
 # COPY docker/start-vnc.sh /opt/bin/start-vnc.sh
+
+# Chrome Launch Script Modication
+COPY docker/vglrun-google-chrome /opt/google/chrome/google-chrome
+RUN chmod +x /opt/google/chrome/google-chrome
 
 # Language
 RUN apt update \

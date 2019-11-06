@@ -30,7 +30,7 @@ gpu-hub: ## [Hub] Node up (GPU)
 	docker run -d --init -p 4445:4444 --name gpu-hub --net gpu-net selenium/hub:3.141.59
 
 gpu-node: ## [Grid] Node up (GPU Chrome)
-	docker run -d --init --gpus all -p 15701:5900 --name gpu-node --net gpu-net --env-file docker/gpu-node.env gpu-chrome:latest
+	docker run -d --init --gpus all -p 15701:5900 --name gpu-node --net gpu-net --env-file docker/gpu-node.env -v /tmp/.X11-unix/:/tmp/.X11-unix:rw gpu-chrome:latest
 
 gpu-node-tty: ## [Grid] Node tty
 	docker exec -it gpu-node bash

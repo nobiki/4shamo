@@ -1,4 +1,3 @@
-tests/results/output.xml
-tests/results/log.html
-tests/results/report.html
+tests/results/
+gpu-tests/results/
 *.png

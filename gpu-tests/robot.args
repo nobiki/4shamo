@@ -1,0 +1,3 @@
+--variable GRID_URL: http://gpu-hub:4444/wd/hub
+--variable BROWSER: chrome
+# --variable BROWSER: firefox

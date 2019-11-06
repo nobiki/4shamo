@@ -35,6 +35,18 @@ services:
     env_file: docker/node.env
     init: true
 
+  gpu-chrome:
+    image: gpu-chrome
+    build:
+      context: .
+      dockerfile: docker/gpu-chrome.Dockerfile
+    # ports:
+    #   - 15701-1570${SCALE}:5900
+    # depends_on:
+    #   - sele-hub
+    # env_file: docker/node.env
+    # init: true
+
   4shamo:
     build:
       context: .

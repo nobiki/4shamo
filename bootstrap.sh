@@ -13,6 +13,7 @@ BUILDTAG=`pwgen -A -0 -1 10`
 export BUILDTAG=${BUILDTAG}
 echo "BUILDTAG: ${BUILDTAG}"
 
+# robot -A robot.args -v BUILDTAG:${BUILDTAG} --outputdir results/${BUILDTAG} spec.robot
 robot -A robot.args -v BUILDTAG:${BUILDTAG} --outputdir results/${BUILDTAG} benchmark.robot
 
 # robot -A robot.args -v BUILDTAG:${BUILDTAG} -t このテスト -t あのテスト client.robot

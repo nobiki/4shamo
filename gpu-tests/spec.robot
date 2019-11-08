@@ -9,13 +9,10 @@ Suite Teardown              ブラウザを終了
 Resource                    ./resources/common.robot
 
 *** Test Cases ***
-BASEMARK Web 3.0にアクセス
-    Open Browser  https://web.basemark.com  ${BROWSER}  None  ${GRID_URL}
-
-    Click Element  id:start
-
-    Sleep  1200
-
-    スクリーンショットを保存  basemark.png
-
+スペック確認
+    Open Browser  chrome://gpu  ${BROWSER}  None  ${GRID_URL}
+    Sleep  1
+    スクリーンショットを保存  gpu-spec.png
+    Sleep  1
     ブラウザを終了
+

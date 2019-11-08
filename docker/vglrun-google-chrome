@@ -1,5 +1,4 @@
 #!/bin/bash
 
 # Note: exec -a below is a bashism.
-echo "[vglrun google-chrome]"
 exec -a "$0" "vglrun /opt/google/chrome/google-chrome-base" --no-sandbox "$@"

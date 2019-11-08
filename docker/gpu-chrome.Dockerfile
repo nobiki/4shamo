@@ -40,15 +40,15 @@ RUN apt-get update && apt-get install -y \
     rm -rf /var/lib/apt/lists/*
 
 # Xvfb Script Modication
-COPY docker/entry_point.sh /opt/bin/entry_point.sh
-COPY docker/start-xvfb.sh /opt/bin/start-xvfb.sh
+# COPY docker/entry_point.sh /opt/bin/entry_point.sh
+# COPY docker/start-xvfb.sh /opt/bin/start-xvfb.sh
 # COPY docker/start-fluxbox.sh /opt/bin/start-fluxbox.sh
-COPY docker/start-selenium-node.sh /opt/bin/start-selenium-node.sh
+# COPY docker/start-selenium-node.sh /opt/bin/start-selenium-node.sh
 # COPY docker/start-vnc.sh /opt/bin/start-vnc.sh
 
 # Chrome Launch Script Modication
-COPY docker/vglrun-google-chrome /opt/google/chrome/google-chrome
-RUN chmod +x /opt/google/chrome/google-chrome
+# COPY docker/vglrun-google-chrome /opt/google/chrome/google-chrome
+# RUN chmod +x /opt/google/chrome/google-chrome
 
 # Language
 RUN apt update \
@@ -63,13 +63,17 @@ RUN locale-gen ja_JP.UTF-8 \
 
 USER seluser
 
-# Display
-ENV VGL_DISPLAY $DISPLAY
-ENV PATH /usr/local/nvidia/bin:/opt/VirtualGL/bin:/usr/local/cuda/bin:${PATH}
+ENV DISPLAY :0
+ENV VGL_DISPLAY :0
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
+
+# Nvidia Docker Links
+LABEL com.nvidia.volumes.needed="nvidia_driver"
+ENV PATH /opt/VirtualGL/bin:/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
 # Nvidia parameters
 ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
 ENV NVIDIA_REQUIRE_CUDA "cuda>=10.1 brand=tesla,driver>=384,driver<385 brand=tesla,driver>=396,driver<397 brand=tesla,driver>=410,driver<411"
 

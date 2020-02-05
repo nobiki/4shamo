@@ -1,3 +1,5 @@
+> DEPRECATED: The repository has been moved to [selenium-base](https://github.com/nobiki/selenium-base).
+
 # 4shamo
 
 Selenium Grid + Robotframework on Docker

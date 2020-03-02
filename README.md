@@ -1,4 +1,4 @@
-> DEPRECATED: The repository has been moved to [selenium-base](https://github.com/nobiki/selenium-base).
+> DEPRECATED: The repository has been moved to [selenium-base](https://github.com/nobiki/docker-base/tree/master/services/selenium-base).
 
 # 4shamo
 

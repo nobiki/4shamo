@@ -2,7 +2,7 @@
 .PHONY: help
 
 export PROJECT_NAME=4shamo
-export SCALE=3
+export SCALE=1
 
 hub: ## [Grid] Hub up
 	docker-compose -p ${PROJECT_NAME} up -d sele-hub

@@ -4,7 +4,7 @@ services:
   sele-hub:
     container_name: sele-hub
     hostname: sele-hub
-    image: selenium/hub:3.141.59
+    image: selenium/hub:latest
     ports:
       - 4444:4444
     environment:

@@ -1,4 +1,4 @@
-FROM selenium/node-firefox-debug:3.141.59
+FROM selenium/node-firefox:144.0-20251101
 
 RUN sudo apt update && sudo apt install -y locales tzdata language-pack-ja-base language-pack-ja fonts-noto-cjk
 
